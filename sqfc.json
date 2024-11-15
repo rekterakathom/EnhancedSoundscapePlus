@@ -1,0 +1,12 @@
+{
+  "inputDirs": [
+    "P:/addons"
+  ],
+  "includePaths": [
+    "P:/"
+  ],
+  "excludeList": [
+  ],
+  "outputDir": "P:/",
+  "workerThreads": 8
+}

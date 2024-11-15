@@ -1,0 +1,12 @@
+{
+  "inputDirs": [
+    "P:/overthrow_main"
+  ],
+  "includePaths": [
+    "P:/"
+  ],
+  "excludeList": [
+  ],
+  "outputDir": "P:/",
+  "workerThreads": 8
+}

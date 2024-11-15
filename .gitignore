@@ -1,0 +1,12 @@
+## Added by HEMTT
+releases/*
+*.biprivatekey
+keys/*
+.hemtt/local
+.hemttout
+####
+
+hemtt.exe
+.hemtt/template/
+*.pbo
+*.exe

@@ -1,0 +1,29 @@
+name = "Enhanced Soundscape Plus"
+prefix = "ESSP"
+author = "ThomasAngel"
+template = "cba"
+mainprefix = "x"
+files = [
+    "LICENSE",
+    "mod.cpp",
+    "README.md"
+]
+folder_optionals = false
+sig_version = 3
+version = "3.0.0.0"
+
+releasebuild = [
+  "!compile_scripts"
+]
+
+[scripts.compile_scripts]
+steps_windows = [
+    "echo 'Compile Arma Scripts'",
+    "ArmaScriptCompiler.exe"
+]
+
+steps_linux = [
+    "echo 'Compiling Arma Scripts does not work yet on Linux'"
+]
+only_release = true
+show_output = true
