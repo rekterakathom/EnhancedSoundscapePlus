@@ -4,7 +4,7 @@
 #define QCBA_SETTING(var) QUOTE(CBA_SETTING(var))
 
 #define MIN_VISIBILITY 0.1
-#define POSITIONAGL(obj) ASLtoAGL (getPosASL obj)
+#define POSITIONAGL(obj) ASLToAGL (getPosASL obj)
 #define SPEEDOFSOUND 343
 
 #define DFUNC(var1) TRIPLES(ADDON,fnc,var1)

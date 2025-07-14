@@ -58,7 +58,7 @@ private _prefix = [(_config >> "L_ES_Prefix"), QGVAR(cached_Prefix) + _cachedVar
 if (_prefix == "nosound") exitWith {};
 
 if (_prefix isEqualTo "") then {
-    if (_weapon == handGunWeapon _shooter) then {
+    if (_weapon == handgunWeapon _shooter) then {
         _prefix = "pistol";
         _maxPlopp = 1400;
     } else {

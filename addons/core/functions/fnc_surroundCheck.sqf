@@ -19,32 +19,39 @@ private _sPos =  eyePos _shooter;
 private _hits = [];
 
 // Define some constants
-private _sposX = _spos # 0;
-private _sposY = _spos # 1;
-private _sposZ = _spos # 2;
+_sPos params ["_sposX", "_sposY", "_sposZ"];
 private _ZPosConstant = _sposZ + sin 4.048 * _maxPlopp;
 
-private ["_checkPos", "_intersec", "_dist"]; // Avoid re-creating these every iteration
-for "_i" from 0 to 360 step 4 do {
-    _checkPos = [_sposX + ((sin _i) * _maxPlopp), _sposY + ((cos _i) * _maxPlopp), _ZPosConstant];
-    _intersec = lineIntersectsSurfaces [_sPos, _checkPos, _shooter, _shooter,true,1,"NONE","NONE"];
+/*
+    We prepare the checks and then run them in parallel (multithreaded) -
+    with the alt syntax of lineIntersectsSurfaces
+*/
+private ["_checkPos", "_dist"]; // Avoid re-creating these every iteration
+{
+    _x params ["_startAngle", "_endAngle", "_checkAngle"];
+    private _intersectionChecks = [];
+    for "_i" from _startAngle to _endAngle step _checkAngle do {
+        _checkPos = [_sposX + ((sin _i) * _maxPlopp), _sposY + ((cos _i) * _maxPlopp), _ZPosConstant];
+        _intersectionChecks pushBack [_sPos, _checkPos, _shooter, _shooter,true,1,"NONE","NONE"];
+    };
 
-    if (_intersec isNotEqualTo []) then {
-        _checkPos = _intersec select 0 select 0;
-        _dist = _sPos vectorDistance _checkPos;
-        if (_dist < 100) exitWith {
-            _i = _i + 45;
-        };
-        if (_dist >= 100) exitWith {
-            _hits pushBack [_dist, _checkPos];
-            if (_dist >= 300) then {
-                _i = _i + 35;
-            } else {
-                _i = _i + 50;
+    {
+        if (_x isNotEqualTo []) then {
+            _checkPos = _x select 0 select 0;
+            _dist = _sPos vectorDistance _checkPos;
+            if (_dist >= 100) exitWith {
+                _hits pushBack [_dist, _checkPos];
             };
         };
-    };
-};
+    } forEach lineIntersectsSurfaces [_intersectionChecks];
+
+    if ((count _hits) >= 2) exitWith {};
+} forEach [
+    // Total possible raycasts: 32 (none overlapping)
+    [0, 360, 45],
+    [22.5, 382.5, 45],
+    [11.25, 371.25, 22.5]
+];
 
 #ifdef ISDEV
     GVAR(debugLineArray) pushBack [_sPos, _hits];

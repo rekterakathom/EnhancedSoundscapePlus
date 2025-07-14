@@ -10,7 +10,7 @@
  * None
  */
 if (isNil QGVAR(debuggerDraw3D)) then {
-    GVAR(debuggerDraw3D) = addMissionEventHandler ["draw3D", {
+    GVAR(debuggerDraw3D) = addMissionEventHandler ["Draw3D", {
         {
             _x params ["_obj", ["_text", ""]];
             if (isNull _obj) then {

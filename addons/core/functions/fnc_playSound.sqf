@@ -23,7 +23,7 @@ if (_sound == "") then {
 DUMP("Play Sound 3D: " + str _sound);
 private _distance = GVAR(soundData) getOrDefault [_sound, 3000];
 private _dummy = "#particlesource" createVehicleLocal _pos;
-private _soundplayer = _dummy say3d [_sound, _distance, 0.9 + random 0.2];
+private _soundplayer = _dummy say3D [_sound, _distance, 0.9 + random 0.2];
 #ifdef ISDEV
     GVAR(debugArray) pushBack [_pos, _sound];
     private _marker = createMarkerLocal [format [QGVAR(DebugMarker%1), GVAR(count)], _pos];
